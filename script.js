@@ -18,7 +18,7 @@ function updateAveragePrice() {
   averagePriceParagraph.textContent =
     "The average starting price is $" + average.toFixed(2);
 }
-updateAveragePrice();
+
 // Set a delay before inserting the new freelancer
 setTimeout(() => {
   insertFreelancer(newFreelancers);
@@ -28,7 +28,7 @@ const newFreelancers = [
   {
     Name: "Carol",
     Occupation: "Programmer",
-    Starting_Price: "$70",
+    StartingPrice: "$70",
   },
   {
     Name: "Steve",
@@ -58,18 +58,20 @@ const newFreelancers = [
 ];
 
 function stopTime(timer) {
-  if (newFreelancers.length > 1) {
+  if (newFreelancers.length > 0) {
     clearInterval(timer);
   }
 }
 
 function insertFreelancer(newFreelancers) {
   const tableSelect = document.querySelector("table");
-  const insertFreelancer = newFreelancers.pop();
+  const insertFreelancer = newFreelancers.shift();
   const newRow = document.createElement("tr");
   newRow.innerHTML = `<td>${insertFreelancer.Name}</td>
                        <td>${insertFreelancer.Occupation}</td>
-                       <td>${insertFreelancer.StartingPrice}</td>`;
+                       <td class="price">${insertFreelancer.StartingPrice}</td>`
+                       ;
+
   tableSelect.appendChild(newRow);
   updateAveragePrice();
 }
